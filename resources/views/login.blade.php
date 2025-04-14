@@ -6,7 +6,7 @@
     <img src="{{ asset('images/signage.jpg') }}" alt="Signage" class="w-[200px]">
     <div class="w-[450px] p-8 bg-white rounded-2xl shadow ">
         <form action="{{ url('/login') }}" method="post">
-            @csrf()
+            @csrf
             <div class="my-3">
                 <label for="email">Email</label>
                 <input type="text" name="email" id="email" required>
@@ -15,6 +15,16 @@
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password" required>
             </div>
+
+            @if ($errors->any())
+                <div class="mt-4 text-red-500">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
             <div class="flex gap-4">
                 <button class="primary">Login</button>
